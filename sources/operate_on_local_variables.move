@@ -23,7 +23,6 @@ module test::operate_on_local_variables {
         };
     }
 
-
     public entry fun good_object_write(account: &signer) acquires MyObject{
         let object = borrow_global_mut<MyObject>(signer::address_of(account));
 
