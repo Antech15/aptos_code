@@ -20,11 +20,9 @@ module test::write_values_explicitly {
         helper(x);
     }
 
-
     public entry fun explicit() {
         let x: u128 = 50005000;
 
         helper(x);
     }
-
 }
