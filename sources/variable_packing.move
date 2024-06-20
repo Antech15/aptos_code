@@ -56,5 +56,4 @@ module test::variable_packing {
             k = k + 1;
         };
     }
-
 }
