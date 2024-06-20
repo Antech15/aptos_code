@@ -59,5 +59,4 @@ module test::read_instead_of_write2 {
             k = k + x1;
         };
     }
-
 }
