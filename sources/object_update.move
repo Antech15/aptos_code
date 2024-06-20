@@ -1,6 +1,6 @@
-module test::object_update {
-    use std::vector;
+module test::object_update5 {
     use std::signer;
+    use std::vector;
 
     struct MyObject has key, store {
         a:u128,
@@ -14,8 +14,7 @@ module test::object_update {
         z:u8
     }
 
-
-    public entry fun create_object(account: signer) {
+    public entry fun create_object(account: &signer) {
         let vec = vector::empty<u64>();
         let k:u64 = 0;
         while (k < 100) {
@@ -23,7 +22,7 @@ module test::object_update {
             k = k + 1;
         };
 
-        move_to<MyObject>(&account, MyObject {
+        let object = MyObject {
                 a:1000,
                 b:1000,
                 c:1000,
@@ -33,54 +32,55 @@ module test::object_update {
                 x:10,
                 y:10,
                 z:10
-            });
+            };
+
+        move_to<MyObject>(account, object);
     }
     
 
     public entry fun bad_object_update(account: &signer, new_value: u8) acquires MyObject {
         
         let k:u64 = 0;
-        //will be intermidiate object
 
         while (k < 10) {
 
             let object = move_from<MyObject>(signer::address_of(account));
 
-            // destroy
             let MyObject {
                 a:a,
                 b:b,
                 c:c,
                 d:d,
-                vec: vec,
+                vec:vec,
                 w:w,
-                x:_,
+                x: _,
                 y:y,
                 z:z
             } = object;
 
-            // create new resource
-            move_to<MyObject>(account, MyObject {
+            // create new object
+            let result = MyObject {
                 a:a,
                 b:b,
                 c:c,
                 d:d,
-                vec: vec,
+                vec:vec,
                 w:w,
-                x:new_value,
+                x: new_value,
                 y:y,
                 z:z
+            };
 
-            });
+            move_to<MyObject>(account, result);
             k = k + 1;
-        }
+        };
     }
 
-    
-    public entry fun good_object_update(account: &signer, new_value: u8) acquires MyObject{
+
+    public entry fun good_object_update(account: &signer, new_value: u8) acquires MyObject {
+        let object = borrow_global_mut<MyObject>(signer::address_of(account));
         let k:u64 = 0;
         while (k < 10) {
-            let object = borrow_global_mut<MyObject>(signer::address_of(account));
             object.x = new_value;
             k = k + 1;
         };
