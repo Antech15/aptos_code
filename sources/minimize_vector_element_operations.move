@@ -19,7 +19,6 @@ module test::minimize_vector_element_operations {
         };
     }
 
-
     public entry fun good_vector_access() {
         let vec = vector::empty<u256>();
 
@@ -41,5 +40,4 @@ module test::minimize_vector_element_operations {
             k = k + increment3;
         };
     }
-
 }
