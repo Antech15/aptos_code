@@ -27,7 +27,6 @@ module test::operate_on_local_variables {
         let object = borrow_global_mut<MyObject>(signer::address_of(account));
 
         object.value = 0;
-
         let intermediate = object.value;
 
         while (intermediate < 100000) {
