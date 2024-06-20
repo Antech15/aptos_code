@@ -12,21 +12,24 @@ module test::variable_packing {
     }
 
     public entry fun create_object(account: signer) {
-        move_to<MyObject>(&account, MyObject {
+        let object = MyObject {
                 x8: 1,
                 x32: 1,
                 x24: 1
-            });
+            };
+
+        move_to<MyObject>(&account, object);
     }
 
     public entry fun create_packed_object(account: signer) {
-        move_to<MyPackedObject>(&account, MyPackedObject {
+        let object =  MyPackedObject {
                 x: 1
-            });
+            };
+
+        move_to<MyPackedObject>(&account, object);
     }
 
-    public entry fun no_variable_packing(account: &signer) 
-    acquires MyObject{
+    public entry fun no_variable_packing(account: &signer) acquires MyObject{
         let object = borrow_global<MyObject>(signer::address_of(account));
 
         let k:u64 = 0;
@@ -39,10 +42,10 @@ module test::variable_packing {
         };
     }
 
-    public entry fun variable_packing(account: &signer) 
-    acquires MyPackedObject{
-        let packed_object = borrow_global<MyPackedObject>(signer::address_of(account));
-        let x: u64 = packed_object.x;
+    public entry fun variable_packing(account: &signer) acquires MyPackedObject{
+        let object = borrow_global<MyPackedObject>(signer::address_of(account));
+
+        let x: u64 = object.x;
 
         let k:u64 = 0;
         while (k < 10000) {
