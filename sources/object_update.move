@@ -56,7 +56,6 @@ module test::object_update5 {
                 z:z
             } = object;
 
-            // create new object
             let result = MyObject {
                 a:a,
                 b:b,
