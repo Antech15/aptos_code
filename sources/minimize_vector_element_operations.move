@@ -1,6 +1,6 @@
 module test::minimize_vector_element_operations {
     use std::vector;
-
+    
     public entry fun bad_vector_access() {
         let vec = vector::empty<u256>();
         let k:u256 = 0;
