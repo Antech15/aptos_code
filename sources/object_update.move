@@ -38,7 +38,6 @@ module test::object_update5 {
     }
 
     public entry fun bad_object_update(account: &signer, new_value: u8) acquires MyObject {
-        
         let k:u64 = 0;
 
         while (k < 10) {
