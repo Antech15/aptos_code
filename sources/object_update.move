@@ -68,8 +68,8 @@ module test::object_update5 {
                 z:z
             };
 
-            move_to<MyObject>(account, result);
             k = k + 1;
+            move_to<MyObject>(account, result);
         };
     }
 
