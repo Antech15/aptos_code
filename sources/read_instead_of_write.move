@@ -1,4 +1,4 @@
-module test::read_instead_of_write {
+module test::read_instead_of_write2 {
     use std::signer;
     use std::vector;
 
@@ -9,11 +9,10 @@ module test::read_instead_of_write {
         d:u128,
         vec: vector<u64>,
         w:u8,
-        x:u8,
+        x:u64,
         y:u8,
         z:u8
     }
-
 
     public entry fun create_object(account: signer) {
         let vec = vector::empty<u64>();
@@ -22,7 +21,8 @@ module test::read_instead_of_write {
             vector::push_back(&mut vec, k);
             k = k + 1;
         };
-        move_to<MyObject>(&account, MyObject {
+
+        let object = MyObject {
                 a:1000,
                 b:1000,
                 c:1000,
@@ -32,27 +32,31 @@ module test::read_instead_of_write {
                 x:10,
                 y:10,
                 z:10
-            });
+            };
+
+        move_to<MyObject>(&account, object);
     }
 
+    public entry fun reading(account: &signer) acquires MyObject{
+        let object = borrow_global<MyObject>(signer::address_of(account));
 
-    public entry fun reading(account: &signer) 
-    acquires MyObject{
         let k:u64 = 0;
+        let x1:u64 = 10;
         while (k < 1000) {
-            let object = borrow_global<MyObject>(signer::address_of(account));
-            let x = object.x;
-            k = k + 1;
+            let x:u8;
+            let x1 = object.x;
+            k = k + x1;
         };
     }
 
-    public entry fun writing(account: &signer) 
-    acquires MyObject{
+    public entry fun writing(account: &signer) acquires MyObject{
+        let object = borrow_global_mut<MyObject>(signer::address_of(account));
+
         let k:u64 = 0;
+        let x1:u64 = 10;
         while (k < 1000) {
-            let object = borrow_global_mut<MyObject>(signer::address_of(account));
-            object.x = 1;
-            k = k + 1;
+            object.x = x1;
+            k = k + x1;
         };
     }
 
