@@ -67,7 +67,9 @@ module test::object_update5 {
         };
 
         move_to<MyObject>(account, new_object);
-    }    public entry fun bad_object_update(account: &signer, new_value: u8) acquires MyObject {
+    }
+
+    public entry fun bad_object_update(account: &signer, new_value: u8) acquires MyObject {
 
         let object = move_from<MyObject>(signer::address_of(account));
 
