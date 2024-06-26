@@ -71,8 +71,7 @@ module test::object_update5 {
 
     public entry fun good_object_update(account: &signer, new_value: u8) acquires MyObject {
         let object = borrow_global_mut<MyObject>(signer::address_of(account));
-        let k:u64 = 0;
-            object.x = new_value;
-            k = k + 1;
+        object.x = new_value;
+        k = k + 1;
     }
 }
