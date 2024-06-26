@@ -69,43 +69,10 @@ module test::object_update5 {
         move_to<MyObject>(account, new_object);
     }
 
-    public entry fun bad_object_update(account: &signer, new_value: u8) acquires MyObject {
-
-        let object = move_from<MyObject>(signer::address_of(account));
-
-        let MyObject {
-            a:a,
-            b:b,
-            c:c,
-            d:d,
-            vec:vec,
-            w:w,
-            x: _,
-            y:y,
-            z:z
-        } = object;
-
-        // create new object
-        let new_object = MyObject {
-            a:a,
-            b:b,
-            c:c,
-            d:d,
-            vec:vec,
-            w:w,
-            x: new_value,
-            y:y,
-            z:z
-        };
-
-        move_to<MyObject>(account, new_object);
-    }
     public entry fun good_object_update(account: &signer, new_value: u8) acquires MyObject {
         let object = borrow_global_mut<MyObject>(signer::address_of(account));
         let k:u64 = 0;
-        while (k < 10) {
             object.x = new_value;
             k = k + 1;
-        };
     }
 }
