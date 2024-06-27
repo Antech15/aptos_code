@@ -1,6 +1,6 @@
 module test::short_circuit2 {
 
-    //returns false
+    //returns true
     public fun expensive_function(): bool {
         let k:u64 = 0;
         while (k < 100000) {
@@ -10,7 +10,7 @@ module test::short_circuit2 {
         b
     }
 
-    //returns true
+    //returns false
     public fun cheap_function(): bool {
         let k:u64 = 0;
         while (k < 10000) {
