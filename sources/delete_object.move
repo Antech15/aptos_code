@@ -49,7 +49,7 @@ module test::delete_object2 {
             move_to(&object_signer, object);
     }
 
-    public entry fun bad_object_update(account: &signer, object: Object<MyObject>) acquires MyObject, ObjectController {
+    public entry fun delete_object(account: &signer, object: Object<MyObject>) acquires MyObject, ObjectController {
 
         //For MyObject resource
         let object_address = object::object_address(&object);
