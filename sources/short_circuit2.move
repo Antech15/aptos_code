@@ -20,14 +20,14 @@ module test::short_circuit2 {
         b
     }
 
-    // F && T
+    // T && F
     public entry fun no_short_circuit() {
         if (expensive_function() && cheap_function()) {
 
         };
     }
 
-    // T && F
+    // F && T
     public entry fun short_circuit() {
         if (cheap_function() && expensive_function()) {
 
