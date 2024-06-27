@@ -6,7 +6,7 @@ module test::short_circuit2 {
         while (k < 100000) {
             k = k + 1;
         };
-        let b: bool = (k == 0);
+        let b: bool = (k != 0);
         b
     }
 
@@ -16,7 +16,7 @@ module test::short_circuit2 {
         while (k < 10000) {
             k = k + 1;
         };
-        let b: bool = (k != 0);
+        let b: bool = (k == 0);
         b
     }
 
