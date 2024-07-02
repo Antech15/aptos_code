@@ -18,7 +18,7 @@ module test::operate_on_local_variables {
 
         object.value = 0;
 
-        while (object.value < 100000) {
+        while (object.value < 10000) {
             object.value = object.value + 1;
         };
     }
@@ -29,7 +29,7 @@ module test::operate_on_local_variables {
         object.value = 0;
         let intermediate = object.value;
 
-        while (intermediate < 100000) {
+        while (intermediate < 10000) {
             intermediate = intermediate + 1;
         };
         object.value = intermediate;
