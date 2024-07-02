@@ -1,6 +1,7 @@
 [package]
 name = "test"
-version = "0.0.0"
+version = "0.0.1"
+edition = "2024.beta"
 
 [addresses]
 test = "0xf17b31d66e881d1b49c3a98c448f133d20517fa93b4041ea11cab24c8603d93b"
